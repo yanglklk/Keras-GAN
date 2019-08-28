@@ -37,7 +37,7 @@ class CGAN():
         # and generates the corresponding digit of that label
         noise = Input(shape=(self.latent_dim,))
         label = Input(shape=(1,))
-        img = self.generator([noise, label])
+        img = self.generaadtor([noise, label])
 
         # For the combined model we will only train the generator
         self.discriminator.trainable = False
@@ -72,6 +72,8 @@ class CGAN():
 
         noise = Input(shape=(self.latent_dim,))
         label = Input(shape=(1,), dtype='int32')
+        
+        # 因为是 one hot 编码的标签 input_dim=10 
         label_embedding = Flatten()(Embedding(self.num_classes, self.latent_dim)(label))
 
         model_input = multiply([noise, label_embedding])
